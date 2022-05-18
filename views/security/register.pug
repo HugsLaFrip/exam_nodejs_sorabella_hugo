@@ -1,0 +1,21 @@
+extends ../layouts/base.pug
+
+block content 
+    h2.mb-3.pt-4.text-center Créer son compte
+
+    form.w-75.m-auto.mb-5(action="/register", method="post")
+        .mb-3 
+            label.form-label(for="firstName") Prénom 
+            input.form-control(type="text", name="firstName", required)
+        .mb-3 
+            label.form-label(for="lastName") Nom  
+            input.form-control(type="text", name="lastName", required)
+        .mb-3 
+            label.form-label(for="email") Email 
+            input.form-control(type="email", name="email", required)
+        .mb-3 
+            label.form-label(for="password") Mot de passe 
+            input.form-control(type="password", name="password", required) 
+        button.btn.btn-success(type="submit") Créer son compte
+
+    .alert.alert-info Je possède déjà un compte : #[a.btn.btn-primary(href="/login") Se connecter]

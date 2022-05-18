@@ -8,6 +8,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import router from "./routes/routes.js";
+import dbConnect from "./config/connectMongo.js";
+import flash from "connect-flash";
+import MongoStore from "connect-mongo";
+
+import flashMessages from "./middlewares/flashMessages.js";
+import sessionToTemplate from "./middlewares/session.js";
 
 /**
  * Constants
@@ -22,13 +28,25 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
     name: 'exam_node',
-    secret: 'ahh',
+    secret: process.env.SESSION_TOKEN,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: `mongodb+srv://${process.env.DB_HOST}:${process.env.DB_PASSWORD}@cluster0.0jahg.mongodb.net/${process.env.DB_NAME}` })
 }))
+app.use(flash());
 
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
+
+/**
+ * Middlewares
+ */
+app.use(flashMessages);
+app.use(sessionToTemplate);
+
+/**
+ * Router
+ */
 
 app.use(router);
 

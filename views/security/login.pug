@@ -1,0 +1,15 @@
+extends ../layouts/base.pug
+
+block content 
+    h2.text-center.pt-3.mb-4 Se connecter
+    
+    form.w-75.m-auto.mb-5(action="/login", method="post")
+        .mb-3 
+            label.form-label(for="email") Email 
+            input.form-control(type="email", name="email", required) 
+        .mb-3 
+            label.form-label.required(for="password") Mot de passe 
+            input.form-control(type="password", name="password", required)
+        button.btn.btn-success(type="submit") Se connecter 
+    
+    .alert.alert-info Si vous ne possèdez pas de compte : #[a.btn.btn-primary(href="/register") Créer son compte]

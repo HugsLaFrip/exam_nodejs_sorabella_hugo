@@ -9,8 +9,13 @@ html(lang="en")
     body 
         include ./partials/header.pug
         
-        main.container 
-            block content
+        main
+            if flashMessages.length > 0
+                each message in flashMessages
+                    div.text-center(class=`alert alert-${message.class}`)=message.content
+
+            .container.shadow.h-100
+                block content
 
         include ./partials/footer.pug
         script(src="js/index.js") 
