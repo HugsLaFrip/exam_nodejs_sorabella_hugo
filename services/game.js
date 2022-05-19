@@ -36,13 +36,13 @@ export const yamsResult = diceResults => {
                 if (!pair.includes(actualValue)) pair.push(actualValue);
                 break;
             case 3:
-                return { winType: 'Carré', bakeryWon: 2 };
+                return { winType: 'Carré', nbrBakeryWon: 2 };
             case 4:
-                return { winType: 'Yams !', bakeryWon: 3 };
+                return { winType: 'Yams !', nbrBakeryWon: 3 };
         }
     }
 
-    if (pair.length == 2) return { winType: 'Double pair', bakeryWon: 1 };
+    if (pair.length == 2) return { winType: 'Double pair', nbrBakeryWon: 1 };
 
-    return { winType: false, bakeryWon: 0 };
+    return { winType: false, nbrBakeryWon: 0 };
 }

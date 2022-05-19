@@ -3,5 +3,7 @@ header.bg-dark.bg-gradient.text-center.p-4
         a.text-white(href="/") Bienvenue au concours des boulangers
     
     if session.user 
+        a.btn.btn-primary.me-3(href="/play") Jouer
         a.btn.btn-info.me-3(href="/my-earnings") Mes patisseries
+        a.btn.btn-success.me-3(href="/all-earnings") Tous les gagnants
         a.btn.btn-danger(href="/logout") Se déconnecter

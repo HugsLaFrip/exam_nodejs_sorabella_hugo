@@ -4,9 +4,11 @@
 import express from "express";
 import { loginGet, loginPost, logout } from "../controllers/security/login.js";
 import { registerGet, registerPost } from "../controllers/security/register.js";
+import { allEarnings, userEarnings } from "../controllers/winnings.js";
 import { play, result } from "../controllers/yams.js";
+import canPlay from "../middlewares/canPlay.js";
 import isLoggedIn from "../middlewares/isLoggedIn.js";
-import { formatDate } from "../services/date.js";
+import momentToTemplate from "../middlewares/moment.js";
 
 /**
  * Router
@@ -19,7 +21,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('home');
 });
-console.log(formatDate(new Date()));
+
 router.route('/login')
     .get(loginGet)
     .post(loginPost);
@@ -31,7 +33,12 @@ router.route('/register')
     .post(registerPost);
 
 router.get('/play', isLoggedIn, play);
-router.get('/result', isLoggedIn, result);
+router.get('/result', isLoggedIn, canPlay, momentToTemplate, result);
+router.get('/my-earnings', isLoggedIn, momentToTemplate, userEarnings);
+router.get('/all-earnings', momentToTemplate, allEarnings);
+router.get('/winner', (req, res) => {
+    res.send('The winner is...');
+})
 
 /**
  * Export

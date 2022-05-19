@@ -1,0 +1,11 @@
+extends ../layouts/base.pug
+
+block content 
+    if winnings.length > 0
+        h2.text-center.p-4.mb-3.h1 Félicitation ! Vous avez gagné #{winnings.length} patisseries depuis le début du concours
+        each win in winnings 
+            include ../layouts/specials/bakeryCard.pug
+
+    else
+        .text-center   
+            .badge.bg-secondary.mt-5.p-3 Aucun gain... Revenez plus tard !

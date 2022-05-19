@@ -1,9 +1,11 @@
 /**
  * imports
  */
+import moment from "moment";
 import bakeryModel from "../models/bakery.js";
 import userModel from "../models/user.js";
 import winModel from "../models/win.js";
+import { increaseBakeryWonCount } from "../services/env.js";
 import { getDiceResults, yamsResult } from "../services/game.js";
 
 /**
@@ -15,21 +17,24 @@ export const play = (req, res) => {
 
 export const result = async (req, res) => {
     const results = getDiceResults(5, 6);
-    const { winType, bakeryWon } = yamsResult(results);
+    const { winType, nbrBakeryWon } = yamsResult(results);
 
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
+    const date = moment().add(1, 'day');
 
     await userModel.updateOne({ name: req.session.user.email }, { nextTry: date });
+    req.session.user.nextTry = date;
 
     if (!winType) return res.render('play/result', { results });
 
-    const bakeries = await bakeryModel.aggregate([{ $sample: { size: bakeryWon } }]);
-    const user = req.session.user;
+    increaseBakeryWonCount(nbrBakeryWon);
+
+    const bakeries = await bakeryModel.aggregate([{ $sample: { size: nbrBakeryWon } }]);
 
     bakeries.forEach(bakery => {
-        winModel.create({ user, bakery });
+        winModel.create({ user: req.session.user, bakery });
     })
 
-    res.render('play/result', { results, win: { winType, bakeryWon } });
+    const earnings = await winModel.find().populate('bakery').sort({ _id: -1 }).limit(nbrBakeryWon);
+
+    res.render('play/result', { results, win: { winType, nbrBakeryWon }, earnings });
 }

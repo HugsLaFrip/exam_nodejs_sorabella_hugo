@@ -1,0 +1,10 @@
+extends ../layouts/base.pug
+
+block content 
+    if winnings.length > 0
+        h2.text-center.p-4.mb-3.h1 #{winnings.length} patisseries ont été gagnées depuis le début du concours
+        each win in winnings 
+            include ../layouts/specials/bakeryCard.pug              
+
+    else 
+        .badge.badge-secondary Aucun gain...

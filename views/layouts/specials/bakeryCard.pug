@@ -1,0 +1,7 @@
+.shadow.d-flex.flex-column.flex-md-row.justify-content-between.align-items-center.w-75.mx-auto.mb-3.pe-lg-3.rounded-4 
+    img.mb-3.mb-md-0(src=`img/${win.bakery.photoPath}`, alt="Photo de la patisserie", width="200", height="200")
+    div.d-md-flex.flex-md-column.flex-lg-row.justify-content-between.align-items-baseline.w-100.h-100.p-3 
+        p.fs-1.text-center.text-lg-start.ms-lg-5= win.bakery.name 
+        div
+            p.fw-bold.fs-2= win.user.firstName + ' ' + win.user.lastName
+            p.fst-italic.fs-5 Gagné le #{moment(win.createdAt).format("DD/MM/YYYY à HH:mm:ss")}  

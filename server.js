@@ -14,13 +14,13 @@ import MongoStore from "connect-mongo";
 
 import flashMessages from "./middlewares/flashMessages.js";
 import sessionToTemplate from "./middlewares/session.js";
+import isGameFinished from "./middlewares/isGameFinished.js";
 
 /**
  * Constants
  */
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 /**
  * Use needed for the app
  */
@@ -43,6 +43,7 @@ app.set('views', __dirname + '/views');
  */
 app.use(flashMessages);
 app.use(sessionToTemplate);
+app.use(isGameFinished);
 
 /**
  * Router

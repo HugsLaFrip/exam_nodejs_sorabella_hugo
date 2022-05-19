@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     },
     nextTry: {
         type: Date,
-        default: new Date('now')
+        default: new Date()
     }
 }, {
     timestamps: true
