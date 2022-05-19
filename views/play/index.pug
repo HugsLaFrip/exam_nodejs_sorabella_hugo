@@ -1,4 +1,19 @@
 extends ../layouts/base.pug
 
-block content 
-    h2 Ha
+block content
+    .text-center.p-3 
+        h2.text-center.mb-3 C'est le moment de jouer !
+
+        .shadow.w-75.m-auto.mb-4.p-3 
+            h4.text-center Rappel des règles :
+
+            ul 
+                li 5 dés seront lancés 
+                li Vous gagnez une ou plusieurs patisseries selon la combinaison des dés :
+                ul 
+                    li - 5 dés identiques : Yams ! Vous gagnez 3 patisseries 
+                    li - 4 dés identiques : Carré ! Vous gagnez 2 patisseries 
+                    li - 2 fois 2 dés identiques : Double paire ! Vous gagnez 1 patisserie
+
+        
+        a.btn.btn-warning(href="/result") Lancer les dés !

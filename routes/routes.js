@@ -4,7 +4,9 @@
 import express from "express";
 import { loginGet, loginPost, logout } from "../controllers/security/login.js";
 import { registerGet, registerPost } from "../controllers/security/register.js";
+import { play, result } from "../controllers/yams.js";
 import isLoggedIn from "../middlewares/isLoggedIn.js";
+import { formatDate } from "../services/date.js";
 
 /**
  * Router
@@ -17,20 +19,19 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('home');
 });
-
+console.log(formatDate(new Date()));
 router.route('/login')
     .get(loginGet)
-    .post(loginPost)
+    .post(loginPost);
 
-router.get('/logout', logout)
+router.get('/logout', logout);
 
 router.route('/register')
     .get(registerGet)
-    .post(registerPost)
+    .post(registerPost);
 
-router.get('/play', isLoggedIn, (req, res) => {
-    res.render('play/index');
-})
+router.get('/play', isLoggedIn, play);
+router.get('/result', isLoggedIn, result);
 
 /**
  * Export

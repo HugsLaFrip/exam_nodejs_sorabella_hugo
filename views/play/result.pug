@@ -1,0 +1,16 @@
+extends ../layouts/base.pug
+
+block content 
+    .text-center.p-3 
+        .shadow.mb-3.p-3 
+            h4 Voici le résultat de vos dés 
+            each result in results 
+                p.d-inline.me-2=result 
+
+        if !win
+            .shadow.bg-dark.bg-gradient.bg-opacity-25.p-3
+                p Perdu
+        else
+            .shadow.p-3 
+                h4.h1.text-success Victoire 
+                p #{win.winType} ! Vous gagnez #{win.bakeryWon} patisserie.s !

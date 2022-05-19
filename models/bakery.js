@@ -1,15 +1,16 @@
 /**
  * imports
  */
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 /**
  * Schema
  */
-const bakerySchema = new Schema({
+const bakerySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
         minlength: 3,
         maxlength: 40
     },
@@ -22,7 +23,7 @@ const bakerySchema = new Schema({
 /**
  * Model
  */
-const bakeryModel = model('bakery', bakerySchema);
+const bakeryModel = mongoose.model('bakery', bakerySchema);
 
 /**
  * Export

@@ -1,18 +1,18 @@
 /**
  * Imports
  */
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 /**
  * Schema
  */
-const winSchema = new Schema({
+const winSchema = new mongoose.Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
     bakery: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'bakery'
     }
 }, {
@@ -22,7 +22,7 @@ const winSchema = new Schema({
 /**
  * Model 
  */
-const winModel = model('win', winSchema);
+const winModel = mongoose.model('win', winSchema);
 
 /**
  * Export
