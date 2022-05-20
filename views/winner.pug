@@ -1,0 +1,14 @@
+extends ./layouts/base.pug
+
+block content
+    .d-flex.flex-column.align-items-center 
+        h2.h1.p-3.mb-3 Et le vainqueur du grand concours de la chocolaterie Sorabella est.....
+
+        img.mb-3(src="img/drumble.gif", alt="GIF roulement de tambour")
+        img.mb-3(src="img/trophy.png", alt="Photo d'un trophée")
+        div.d-flex 
+            p.text-uppercase.fw-bold.me-3.fs-1=winner.user[0].lastName
+            p.fs-1=winner.user[0].firstName
+        p.fs-1.mb-5 #{winner.winCount} victoires !
+    
+        div A bientôt pour de nouvelles aventures

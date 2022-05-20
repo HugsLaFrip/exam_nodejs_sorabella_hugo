@@ -17,3 +17,25 @@ export const allEarnings = async (req, res) => {
 
     res.render('winnings/index', { winnings });
 }
+
+export const winner = async (req, res) => {
+    const winner = (await winModel.aggregate([{
+        $group: {
+            _id: "$user",
+            winCount: { $count: {} }
+        }
+    }, {
+        $sort: { winCount: -1 }
+    }, {
+        $lookup: {
+            from: 'users',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'user'
+        }
+    }]))[0];
+
+    // console.log(winner);
+
+    res.render('winner', { winner });
+}

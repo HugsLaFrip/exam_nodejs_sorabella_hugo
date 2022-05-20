@@ -18,7 +18,6 @@ export const play = (req, res) => {
 export const result = async (req, res) => {
     const results = getDiceResults(5, 6);
     const { winType, nbrBakeryWon } = yamsResult(results);
-
     const date = moment().add(1, 'day');
 
     await userModel.updateOne({ name: req.session.user.email }, { nextTry: date });

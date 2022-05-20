@@ -14,7 +14,6 @@ import MongoStore from "connect-mongo";
 
 import flashMessages from "./middlewares/flashMessages.js";
 import sessionToTemplate from "./middlewares/session.js";
-import isGameFinished from "./middlewares/isGameFinished.js";
 
 /**
  * Constants
@@ -43,7 +42,6 @@ app.set('views', __dirname + '/views');
  */
 app.use(flashMessages);
 app.use(sessionToTemplate);
-app.use(isGameFinished);
 
 /**
  * Router
