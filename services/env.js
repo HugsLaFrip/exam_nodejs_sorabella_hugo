@@ -10,11 +10,7 @@ import os from "os";
 export const increaseBakeryWonCount = (increment) => {
     const envVars = fs.readFileSync(".env", "utf8").split(os.EOL);
 
-    const target = envVars.indexOf(envVars.find((line) => {
-        const keyValRegex = new RegExp(`(?<!#\s*)BAKERY_WON(?==)`);
-
-        return line.match(keyValRegex);
-    }));
+    const target = getIndexOfBakeryVar(envVars);
 
     const value = parseInt(envVars[target].replace('BAKERY_WON=', '')) + increment;
 
@@ -27,11 +23,16 @@ export const increaseBakeryWonCount = (increment) => {
 export const getBakeryCount = () => {
     const envVars = fs.readFileSync(".env", "utf8").split(os.EOL);
 
-    const target = envVars.indexOf(envVars.find((line) => {
+    const target = getIndexOfBakeryVar(envVars);
+
+    return envVars[target].replace('BAKERY_WON=', '');
+}
+
+
+const getIndexOfBakeryVar = array => {
+    return array.indexOf(array.find((line) => {
         const keyValRegex = new RegExp(`(?<!#\s*)BAKERY_WON(?==)`);
 
         return line.match(keyValRegex);
-    }));
-
-    return envVars[target].replace('BAKERY_WON=', '');
+    }))
 }

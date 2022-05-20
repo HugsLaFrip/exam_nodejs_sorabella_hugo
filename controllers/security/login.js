@@ -14,26 +14,24 @@ export const loginGet = (req, res) => {
     res.render('security/login');
 }
 
-export const loginPost = (req, res) => {
+export const loginPost = async (req, res) => {
     const { email, password } = req.body;
 
-    userModel.findOne({ email })
-        .exec()
-        .then(user => {
-            if (!user || !bcrypt.compareSync(password, user.password)) {
-                req.flash('messages', {
-                    class: 'danger',
-                    content: 'Email ou mot de passe incorrect'
-                });
-                return res.redirect('/login');
-            }
+    const user = await userModel.findOne({ email }).exec();
 
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+        req.flash('messages', {
+            class: 'danger',
+            content: 'Email ou mot de passe incorrect'
+        });
 
-            req.session.token = jwt.sign({ id: user._id }, process.env.SESSION_TOKEN, { expiresIn: 60 * 60 * 24 * 7 });
-            req.session.user = user;
+        return res.redirect('/login');
+    }
 
-            res.redirect('/play');
-        })
+    req.session.token = jwt.sign({ id: user._id }, process.env.SESSION_TOKEN, { expiresIn: 60 * 60 * 24 * 7 });
+    req.session.user = user;
+
+    res.redirect('/play');
 }
 
 export const logout = (req, res) => {

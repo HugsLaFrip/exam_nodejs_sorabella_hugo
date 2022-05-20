@@ -35,7 +35,5 @@ export const winner = async (req, res) => {
         }
     }]))[0];
 
-    // console.log(winner);
-
     res.render('winner', { winner });
 }

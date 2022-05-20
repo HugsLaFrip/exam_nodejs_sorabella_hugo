@@ -16,9 +16,6 @@ block content
                 p #{win.winType} ! Vous gagnez #{win.nbrBakeryWon} patisserie.s !
 
                 div.w-75.m-auto 
-                    each earnBakery in earnings 
-                        .shadow.p-3.d-flex.justify-content-between.align-items-center.mb-3 
-                            img(src=`img/${earnBakery.bakery.photoPath}`, alt="Photo de la patisserie", width="200", height="200")
-                            p=earnBakery.bakery.name
-                            p Gagné le #{moment(earnBakery.createdAt).format("DD/MM/YYYY à HH:mm:ss")} 
+                    each win in winnings 
+                        include ../layouts/specials/bakeryCard.pug   
 

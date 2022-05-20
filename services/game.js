@@ -1,8 +1,4 @@
 /**
- * Imports
- */
-
-/**
  * Exports
  */
 export const getDiceResults = (numberOfDice, diceMaxValue) => {

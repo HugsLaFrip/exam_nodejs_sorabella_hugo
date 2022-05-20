@@ -29,15 +29,15 @@ router.route('/login')
 
 router.get('/logout', logout);
 
-router.route('/register')
+router.route('/register', isGameFinished)
     .get(registerGet)
     .post(registerPost);
 
 router.get('/play', isGameFinished, isLoggedIn, play);
-router.get('/result', isGameFinished, isLoggedIn, canPlay, momentToTemplate, result);
+router.get('/result', isGameFinished, isLoggedIn, momentToTemplate, result);
 router.get('/my-earnings', isLoggedIn, momentToTemplate, userEarnings);
 router.get('/all-earnings', momentToTemplate, allEarnings);
-router.get('/winners', winner);
+router.get('/winner', winner);
 
 /**
  * Export

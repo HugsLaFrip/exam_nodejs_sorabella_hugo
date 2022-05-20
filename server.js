@@ -20,6 +20,7 @@ import sessionToTemplate from "./middlewares/session.js";
  */
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /**
  * Use needed for the app
  */
@@ -46,7 +47,6 @@ app.use(sessionToTemplate);
 /**
  * Router
  */
-
 app.use(router);
 
 /**

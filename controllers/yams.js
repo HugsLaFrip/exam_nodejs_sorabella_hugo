@@ -33,7 +33,7 @@ export const result = async (req, res) => {
         winModel.create({ user: req.session.user, bakery });
     })
 
-    const earnings = await winModel.find().populate('bakery').sort({ _id: -1 }).limit(nbrBakeryWon);
+    const winnings = await winModel.find().populate(['user', 'bakery']).sort({ _id: -1 }).limit(nbrBakeryWon);
 
-    res.render('play/result', { results, win: { winType, nbrBakeryWon }, earnings });
+    res.render('play/result', { results, win: { winType, nbrBakeryWon }, winnings });
 }
